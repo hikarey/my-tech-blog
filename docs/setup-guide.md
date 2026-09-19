@@ -1,17 +1,19 @@
-**Docker + Next.js + Rails API + PostgreSQLで個人開発の環境を作ってみた(つまずいたところまとめ)**
+### **Docker + Next.js + Rails API + PostgreSQLで個人開発の環境を作ってみた(つまずいたところまとめ)**
 
-個人開発でサービスを作りたいと思い、Docker上にNext.js(フロントエンド)・Rails APIモード(バックエンド)・PostgreSQL(DB)の開発環境を構築しました。単に手順を並べるだけでなく、実際にやってみて詰まったポイントを中心に残しておきます。
+初心者がDocker上にNext.js(フロントエンド)・Rails APIモード(バックエンド)・PostgreSQL(DB)の開発環境を構築しました。
 
-構成
-フロントエンド: Next.js(TypeScript, Tailwind CSS)
-バックエンド: Rails(APIモード)
-DB: PostgreSQL
-すべてDocker Composeでまとめて起動
-つまずいたポイント1: 空のGemfileだとRailsコマンドが使えない
+**構成**<br>
 
-rails newを実行する前に、Dockerイメージをビルドするための仮のGemfileをsource 'https://rubygems.org'だけで用意していたところ、railsコマンド自体が入っておらず、次のエラーが出ました。
+・　フロントエンド: Next.js(TypeScript, Tailwind CSS)<br>
+・　バックエンド: Rails(APIモード)<br>
+・　DB: PostgreSQL<br>
+・　すべてDocker Composeでまとめて起動<br>
+### つまずいたポイント1: 空のGemfileだとRailsコマンドが使えない<br>
 
+rails newを実行する前に、Dockerイメージをビルドするための仮のGemfileをsource `'https://rubygems.org'`だけで用意していたところ、railsコマンド自体が入っておらず、次のエラーが出ました。
+<pre>
 /usr/bin/entrypoint.sh: line 6: exec: rails: not found
+</pre>
 
 仮のGemfileにもgem 'rails'を明記しておく必要がありました。
 
